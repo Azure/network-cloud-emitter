@@ -6,13 +6,12 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@alloy-js/core": "0.20.0",
-    "@alloy-js/typescript": "0.20.0",
-    "@typespec/compiler": "1.5.0",
-    "@typespec/emitter-framework": "0.12.0"
+    "@alloy-js/core": "0.21.0",
+    "@alloy-js/go": "0.1.0",
+    "@typespec/compiler": "1.5.0"
   },
   "devDependencies": {
-    "@alloy-js/cli": "0.20.0",
+    "@alloy-js/cli": "0.21.0",
     "@alloy-js/rollup-plugin": "0.1.0",
     "@types/node": "^24.1.0",
     "concurrently": "^9.2.0",
@@ -21,7 +20,6 @@
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "@typespec/prettier-plugin-typespec": "^1.2.1",
-    "@typespec/emitter-framework": "0.12.0",
     "@azure-tools/typespec-azure-core": "0.61.0",
     "@azure-tools/typespec-azure-resource-manager": "0.61.0",
     "@azure-tools/typespec-client-generator-core": "0.61.0",
@@ -36,7 +34,7 @@
     "test": "vitest run",
     "test:watch": "vitest -w",
     "watch": "alloy build --watch",
-    "regenerate": "node ./scripts/regenerate.js",
+    "regenerate": "alloy build && node ./scripts/regenerate.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
