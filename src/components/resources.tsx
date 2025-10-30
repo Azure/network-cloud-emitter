@@ -113,7 +113,7 @@ function handleTypes(type: Type, models: Set<Model>, unions: Set<Union>) {
       return;
     } else if (type.namespace?.name !== "NetworkCloud") {
       return;
-    } else if (ignoreDiagnostics(getUnionAsEnum(type)) !== undefined) {
+    } else if ($.union.isValidEnum(type) || ignoreDiagnostics(getUnionAsEnum(type))) {
       unions.add(type);
     } else {
       type.variants.forEach((variant) => {
