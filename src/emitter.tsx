@@ -1,23 +1,20 @@
 import { Output, renderAsync, writeOutput } from "@alloy-js/core";
-import { EmitContext, listServices, Model } from "@typespec/compiler";
-import { Package } from "./components/package.jsx";
-import { Structs } from "./components/structs.jsx";
+import * as go from "@alloy-js/go";
+import { EmitContext } from "@typespec/compiler";
+import { Resources } from "./components/resources.jsx";
+import { ResourceManager, ResourceManagerContext } from "./context/resource-manager.js";
 import { TspContext } from "./context/tsp-context.js";
 
 export async function $onEmit(context: EmitContext) {
-  const models: Model[] = [];
-  const services = listServices(context.program);
-  for (const service of services) {
-    models.push(...service.type.models.values());
-  }
-
   const output = await renderAsync(
     <TspContext.Provider value={{ program: context.program }}>
-      <Output>
-        <Package name="main">
-          <Structs types={models} />
-        </Package>
-      </Output>
+      <ResourceManagerContext.Provider value={{ resourceManager: new ResourceManager() }}>
+        <Output>
+          <go.ModuleDirectory name="networkcloud">
+            <Resources />
+          </go.ModuleDirectory>
+        </Output>
+      </ResourceManagerContext.Provider>
     </TspContext.Provider>,
   );
 
