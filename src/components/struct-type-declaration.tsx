@@ -1,4 +1,4 @@
-import { For, refkey } from "@alloy-js/core";
+import { For, refkey, Show } from "@alloy-js/core";
 import * as go from "@alloy-js/go";
 import { Model } from "@typespec/compiler";
 import { useTsp } from "../context/tsp-context.js";
@@ -28,6 +28,14 @@ export function StructDeclaration(props: StructDeclarationProps) {
           />
         )}
       </For>
+
+      <Show when={props.type.baseModel && props.type.baseModel.kind === "Model"}>
+        <hbr />
+        <hbr />
+        <go.StructEmbed>
+          <TypeExpression type={props.type.baseModel!} />
+        </go.StructEmbed>
+      </Show>
     </go.StructTypeDeclaration>
   );
 }

@@ -30,7 +30,7 @@ export function Resource(props: ResourceProps) {
         </For>
       </go.SourceFile>
 
-      <go.SourceFile path="consts.go">
+      <go.SourceFile path="consts.go" package={props.name.toLowerCase()}>
         <For each={enums} doubleHardline>
           {(e) => <OpenEnumDeclaration type={e} />}
         </For>

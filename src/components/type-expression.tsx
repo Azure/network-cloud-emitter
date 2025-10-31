@@ -1,8 +1,17 @@
 import { code, refkey, type Children } from "@alloy-js/core";
 import { Pointer } from "@alloy-js/go";
-import { getTypeName, isVoidType, type IntrinsicType, type Scalar, type Type } from "@typespec/compiler";
+import {
+  getNamespaceFullName,
+  getTypeName,
+  isVoidType,
+  type IntrinsicType,
+  type Scalar,
+  type Type,
+} from "@typespec/compiler";
 import type { Typekit } from "@typespec/compiler/typekit";
 import { useTsp } from "../context/tsp-context.js";
+import { armCommon } from "../external/arm-common.js";
+import { time } from "../external/time.js";
 import { reportDiagnostic } from "../lib.js";
 
 export interface TypeExpressionProps {
@@ -24,6 +33,13 @@ export function TypeExpression(props: TypeExpressionProps): Children {
   const { $ } = useTsp();
 
   if (isDeclaration($, props.type)) {
+    if (
+      props.type.kind === "Model" &&
+      props.type.namespace &&
+      getNamespaceFullName(props.type.namespace) === "Azure.ResourceManager.CommonTypes"
+    ) {
+      return <>{(armCommon as any)[props.type.name]}</>;
+    }
     return code`${refkey(props.type)}`;
   }
 
@@ -48,50 +64,50 @@ export function TypeExpression(props: TypeExpressionProps): Children {
 }
 
 // Go type mappings for TypeSpec intrinsic types
-const intrinsicNameToGoType = new Map<string, string | null>([
+const intrinsicNameToGoType = new Map<string, Children | null>([
   // Core types
-  ["unknown", "any"], // Matches Go's any
-  ["string", "string"], // Matches Go's string
-  ["boolean", "bool"], // Matches Go's bool
-  ["null", "nil"], // Matches Go's nil
-  ["void", "nil"], // No direct equivalent, use nil
+  ["unknown", code`any`], // Matches Go's any
+  ["string", code`string`], // Matches Go's string
+  ["boolean", code`bool`], // Matches Go's bool
+  ["null", code`nil`], // Matches Go's nil
+  ["void", code`nil`], // No direct equivalent, use nil
   ["never", null], // No direct equivalent in Go
-  ["bytes", "[]byte"], // Matches Go's byte slice
+  ["bytes", code`[]byte`], // Matches Go's byte slice
 
   // Numeric types
-  ["numeric", "float64"], // Parent type for all numeric types, use most precise
-  ["integer", "int"], // Broad integer category, maps to int
-  ["float", "float64"], // Broad float category, maps to float64
-  ["decimal", "float64"], // Decimal numbers as float64
-  ["decimal128", "float64"], // 128-bit decimal as float64
-  ["int64", "int64"], // 64-bit signed integer
-  ["int32", "int32"], // 32-bit signed integer
-  ["int16", "int16"], // 16-bit signed integer
-  ["int8", "int8"], // 8-bit signed integer
-  ["safeint", "int"], // Safe integer, use int as default
-  ["uint64", "uint64"], // 64-bit unsigned integer
-  ["uint32", "uint32"], // 32-bit unsigned integer
-  ["uint16", "uint16"], // 16-bit unsigned integer
-  ["uint8", "uint8"], // 8-bit unsigned integer (byte)
-  ["float32", "float32"], // 32-bit floating point
-  ["float64", "float64"], // 64-bit floating point
+  ["numeric", code`float64`], // Parent type for all numeric types, use most precise
+  ["integer", code`int`], // Broad integer category, maps to int
+  ["float", code`float64`], // Broad float category, maps to float64
+  ["decimal", code`float64`], // Decimal numbers as float64
+  ["decimal128", code`float64`], // 128-bit decimal as float64
+  ["int64", code`int64`], // 64-bit signed integer
+  ["int32", code`int32`], // 32-bit signed integer
+  ["int16", code`int16`], // 16-bit signed integer
+  ["int8", code`int8`], // 8-bit signed integer
+  ["safeint", code`int`], // Safe integer, use int as default
+  ["uint64", code`uint64`], // 64-bit unsigned integer
+  ["uint32", code`uint32`], // 32-bit unsigned integer
+  ["uint16", code`uint16`], // 16-bit unsigned integer
+  ["uint8", code`uint8`], // 8-bit unsigned integer (byte)
+  ["float32", code`float32`], // 32-bit floating point
+  ["float64", code`float64`], // 64-bit floating point
 
   // Date and time types
-  ["plainDate", "time.Time"], // Use time.Time for dates
-  ["plainTime", "time.Time"], // Use time.Time for times
-  ["utcDateTime", "time.Time"], // Use time.Time for UTC date-times
-  ["offsetDateTime", "time.Time"], // Use time.Time for timezone-specific date-times
-  ["duration", "time.Duration"], // Duration as time.Duration
+  ["plainDate", <>{time.Time}</>], // Use time.Time for dates
+  ["plainTime", <>{time.Time}</>], // Use time.Time for times
+  ["utcDateTime", <>{time.Time}</>], // Use time.Time for UTC date-times
+  ["offsetDateTime", <>{time.Time}</>], // Use time.Time for timezone-specific date-times
+  ["duration", <>{time.Duration}</>], // Duration as time.Duration
 
   // String types
-  ["url", "string"], // URLs as strings in Go (or could use url.URL)
+  ["url", code`string`], // URLs as strings in Go (or could use url.URL)
 ]);
 
-export function getScalarIntrinsicExpression($: Typekit, type: Scalar | IntrinsicType): string | null {
+export function getScalarIntrinsicExpression($: Typekit, type: Scalar | IntrinsicType): Children | null {
   let intrinsicName: string;
 
   if ($.scalar.isUtcDateTime(type) || $.scalar.extendsUtcDateTime(type)) {
-    return "time.Time";
+    return <>{time.Time}</>;
   }
   if ($.scalar.is(type)) {
     intrinsicName = $.scalar.getStdBase(type)?.name ?? "";
@@ -103,7 +119,7 @@ export function getScalarIntrinsicExpression($: Typekit, type: Scalar | Intrinsi
 
   if (!goType) {
     reportDiagnostic($.program, { code: "go-unsupported-scalar", target: type });
-    return "any"; // Fallback to any if unsupported
+    return code`any`; // Fallback to any if unsupported
   }
 
   return goType;

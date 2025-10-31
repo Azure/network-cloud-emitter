@@ -10,7 +10,7 @@ export async function $onEmit(context: EmitContext) {
     <TspContext.Provider value={{ program: context.program }}>
       <ResourceManagerContext.Provider value={{ resourceManager: new ResourceManager() }}>
         <Output>
-          <go.ModuleDirectory name="networkcloud">
+          <go.ModuleDirectory name="dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git">
             <Resources />
           </go.ModuleDirectory>
         </Output>

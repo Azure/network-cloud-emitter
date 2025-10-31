@@ -1,4 +1,5 @@
 import { For } from "@alloy-js/core";
+import * as go from "@alloy-js/go";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
 import { resolveArmResources, ResolvedResource } from "@azure-tools/typespec-azure-resource-manager";
 import { ignoreDiagnostics, Model, Type, Union } from "@typespec/compiler";
@@ -21,8 +22,10 @@ export function Resources(props: ResourcesProps) {
 
   return (
     <>
-      <For each={provider.resources ?? []}>{(armResource) => <Resource name={armResource.type.name} />}</For>
-      <Resource name="common" />
+      <go.SourceDirectory path={"api/test"}>
+        <For each={provider.resources ?? []}>{(armResource) => <Resource name={armResource.type.name} />}</For>
+        <Resource name="common" />
+      </go.SourceDirectory>
     </>
   );
 }
@@ -91,10 +94,10 @@ function handleTypes(type: Type, models: Set<Model>, unions: Set<Union>) {
     type = $.model.getEffectiveModel(type);
     if (models.has(type)) {
       return;
-    } else if (type.namespace?.name !== "NetworkCloud") {
-      return;
     } else if ($.array.is(type) || $.record.is(type)) {
       handleTypes(type.indexer.value, models, unions);
+    } else if (type.namespace?.name !== "NetworkCloud") {
+      return;
     } else {
       models.add(type);
       for (const prop of type.properties.values()) {
