@@ -7,15 +7,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// BareMetalMachineList represents a list of bare metal machines.
-type BareMetalMachineList struct {
-  // The BareMetalMachine items on this page
-  value []BareMetalMachine
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // BareMetalMachine represents the physical machine in the rack.
 type BareMetalMachine struct {
   // The list of the resource properties.
@@ -299,4 +290,13 @@ type BareMetalMachineRunReadCommandsParameters struct {
   // The maximum time the commands are allowed to run.
   // If the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).
   limitTimeSeconds int64
+}
+
+// BareMetalMachineList represents a list of bare metal machines.
+type BareMetalMachineList struct {
+  // The BareMetalMachine items on this page
+  value []BareMetalMachine
+
+  // The link to the next page of items
+  nextLink string
 }

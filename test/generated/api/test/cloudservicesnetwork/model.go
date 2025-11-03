@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// CloudServicesNetworkList represents a list of cloud services networks.
-type CloudServicesNetworkList struct {
-  // The CloudServicesNetwork items on this page
-  value []CloudServicesNetwork
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // Upon creation, the additional services that are provided by the platform will be allocated and
 // represented in the status of this resource. All resources associated with this cloud services network will be part
 // of the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many
@@ -104,4 +95,13 @@ type CloudServicesNetworkPatchProperties struct {
 
   // The indicator of whether the platform default endpoints are allowed for the egress traffic.
   enableDefaultEgressEndpoints CloudServicesNetworkEnableDefaultEgressEndpoints
+}
+
+// CloudServicesNetworkList represents a list of cloud services networks.
+type CloudServicesNetworkList struct {
+  // The CloudServicesNetwork items on this page
+  value []CloudServicesNetwork
+
+  // The link to the next page of items
+  nextLink string
 }

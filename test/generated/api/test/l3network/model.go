@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// L3NetworkList represents a list of L3 networks.
-type L3NetworkList struct {
-  // The L3Network items on this page
-  value []L3Network
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // L3Network represents a network that utilizes a single isolation domain set up for layer-3 resources.
 type L3Network struct {
   // The list of the resource properties.
@@ -85,4 +76,13 @@ type L3NetworkProperties struct {
 type L3NetworkPatchParameters struct {
   // The Azure resource tags that will replace the existing ones.
   tags map[string]string
+}
+
+// L3NetworkList represents a list of L3 networks.
+type L3NetworkList struct {
+  // The L3Network items on this page
+  value []L3Network
+
+  // The link to the next page of items
+  nextLink string
 }

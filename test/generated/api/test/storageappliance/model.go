@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// StorageApplianceList represents a list of storage appliances.
-type StorageApplianceList struct {
-  // The StorageAppliance items on this page
-  value []StorageAppliance
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // StorageAppliance represents on-premises Network Cloud storage appliance.
 type StorageAppliance struct {
   // The list of the resource properties.
@@ -107,4 +98,13 @@ type StorageAppliancePatchProperties struct {
 type StorageApplianceEnableRemoteVendorManagementParameters struct {
   // Field Deprecated. This field is not used and will be rejected if provided. The list of IPv4 subnets (in CIDR format), IPv6 subnets (in CIDR format), or hostnames that the storage appliance needs accessible in order to turn on the remote vendor management.
   supportEndpoints []string
+}
+
+// StorageApplianceList represents a list of storage appliances.
+type StorageApplianceList struct {
+  // The StorageAppliance items on this page
+  value []StorageAppliance
+
+  // The link to the next page of items
+  nextLink string
 }

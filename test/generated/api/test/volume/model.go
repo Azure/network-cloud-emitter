@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// VolumeList represents a list of volumes.
-type VolumeList struct {
-  // The Volume items on this page
-  value []Volume
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // Volume represents storage made available for use by resources running on the cluster.
 type Volume struct {
   // The list of the resource properties.
@@ -56,4 +47,13 @@ type VolumeProperties struct {
 type VolumePatchParameters struct {
   // The Azure resource tags that will replace the existing ones.
   tags map[string]string
+}
+
+// VolumeList represents a list of volumes.
+type VolumeList struct {
+  // The Volume items on this page
+  value []Volume
+
+  // The link to the next page of items
+  nextLink string
 }

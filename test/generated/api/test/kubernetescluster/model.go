@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// KubernetesClusterList represents a list of Kubernetes clusters.
-type KubernetesClusterList struct {
-  // The KubernetesCluster items on this page
-  value []KubernetesCluster
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // KubernetesCluster represents the Kubernetes cluster hosted on Network Cloud.
 type KubernetesCluster struct {
   // The list of the resource properties.
@@ -374,4 +365,13 @@ type ControlPlaneNodePatchConfiguration struct {
 type KubernetesClusterRestartNodeParameters struct {
   // The name of the node to restart.
   nodeName string
+}
+
+// KubernetesClusterList represents a list of Kubernetes clusters.
+type KubernetesClusterList struct {
+  // The KubernetesCluster items on this page
+  value []KubernetesCluster
+
+  // The link to the next page of items
+  nextLink string
 }

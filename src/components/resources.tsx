@@ -1,7 +1,7 @@
 import { For } from "@alloy-js/core";
 import * as go from "@alloy-js/go";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-import { resolveArmResources, ResolvedResource } from "@azure-tools/typespec-azure-resource-manager";
+import { resolveArmResources, ResourceModel } from "@azure-tools/typespec-azure-resource-manager";
 import { ignoreDiagnostics, Model, Type, Union } from "@typespec/compiler";
 import { unsafe_Realm } from "@typespec/compiler/experimental";
 import { HttpOperation } from "@typespec/http";
@@ -16,25 +16,25 @@ export function Resources(props: ResourcesProps) {
   const { program } = tspContext;
   const provider = resolveArmResources(program);
 
-  for (const armResource of provider.resources?.values() ?? []) {
+  for (const armResource of provider.resourceModels?.values() ?? []) {
     extractTypesForResource(armResource);
   }
 
   return (
     <>
       <go.SourceDirectory path={"api/test"}>
-        <For each={provider.resources ?? []}>{(armResource) => <Resource name={armResource.type.name} />}</For>
+        <For each={provider.resourceModels ?? []}>{(armResource) => <Resource name={armResource.type.name} />}</For>
         <Resource name="common" />
       </go.SourceDirectory>
     </>
   );
 }
 
-function extractTypesForResource(resourceModel: ResolvedResource) {
+function extractTypesForResource(resourceModel: ResourceModel) {
   const models = new Set<Model>();
   const unions = new Set<Union>();
 
-  for (const resource of resourceModel.operations ?? []) {
+  for (const resource of resourceModel.resources ?? []) {
     if (resource.operations.lifecycle.read) {
       resource.operations.lifecycle.read.map((op) => handleOperationTypes(op.httpOperation, models, unions));
     }

@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// RackList represents a list of racks.
-type RackList struct {
-  // The Rack items on this page
-  value []Rack
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // Rack represents the hardware of the rack and is dependent upon the cluster for lifecycle.
 type Rack struct {
   // The list of the resource properties.
@@ -74,4 +65,13 @@ type RacksPatchProperties struct {
 
   // The globally unique identifier for the rack.
   rackSerialNumber string
+}
+
+// RackList represents a list of racks.
+type RackList struct {
+  // The Rack items on this page
+  value []Rack
+
+  // The link to the next page of items
+  nextLink string
 }

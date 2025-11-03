@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// L2NetworkList represents a list of L2 networks.
-type L2NetworkList struct {
-  // The L2Network items on this page
-  value []L2Network
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // L2Network represents a network that utilizes a single isolation domain set up for layer-2 resources.
 type L2Network struct {
   // The list of the resource properties.
@@ -68,4 +59,13 @@ type L2NetworkProperties struct {
 type L2NetworkPatchParameters struct {
   // The Azure resource tags that will replace the existing ones.
   tags map[string]string
+}
+
+// L2NetworkList represents a list of L2 networks.
+type L2NetworkList struct {
+  // The L2Network items on this page
+  value []L2Network
+
+  // The link to the next page of items
+  nextLink string
 }

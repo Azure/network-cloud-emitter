@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// ClusterManagerList represents a list of cluster manager objects.
-type ClusterManagerList struct {
-  // The ClusterManager items on this page
-  value []ClusterManager
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // ClusterManager represents a control-plane to manage one or more on-premises clusters.
 type ClusterManager struct {
   // The list of the resource properties.
@@ -80,4 +71,13 @@ type ClusterManagerPatchParameters struct {
 
   // The Azure resource tags that will replace the existing ones.
   tags map[string]string
+}
+
+// ClusterManagerList represents a list of cluster manager objects.
+type ClusterManagerList struct {
+  // The ClusterManager items on this page
+  value []ClusterManager
+
+  // The link to the next page of items
+  nextLink string
 }

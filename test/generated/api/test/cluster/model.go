@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// ClusterList represents a list of clusters.
-type ClusterList struct {
-  // The Cluster items on this page
-  value []Cluster
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // Cluster represents the on-premises Network Cloud cluster.
 type Cluster struct {
   // The list of the resource properties.
@@ -426,4 +417,13 @@ type ClusterScanRuntimeParameters struct {
 type ClusterUpdateVersionParameters struct {
   // The version to be applied to the cluster during update.
   targetClusterVersion string
+}
+
+// ClusterList represents a list of clusters.
+type ClusterList struct {
+  // The Cluster items on this page
+  value []Cluster
+
+  // The link to the next page of items
+  nextLink string
 }

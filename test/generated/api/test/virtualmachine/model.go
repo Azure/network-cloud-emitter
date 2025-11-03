@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// VirtualMachineList represents a list of virtual machines.
-type VirtualMachineList struct {
-  // The VirtualMachine items on this page
-  value []VirtualMachine
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // VirtualMachine represents the on-premises Network Cloud virtual machine.
 type VirtualMachine struct {
   // The list of the resource properties.
@@ -176,4 +167,13 @@ type VirtualMachinePatchProperties struct {
 type VirtualMachinePowerOffParameters struct {
   // The indicator of whether to skip the graceful OS shutdown and power off the virtual machine immediately.
   skipShutdown SkipShutdown
+}
+
+// VirtualMachineList represents a list of virtual machines.
+type VirtualMachineList struct {
+  // The VirtualMachine items on this page
+  value []VirtualMachine
+
+  // The link to the next page of items
+  nextLink string
 }

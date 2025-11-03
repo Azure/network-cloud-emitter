@@ -5,15 +5,6 @@ import (
   "dev.azure.com/msazuredev/AzureForOperatorsIndustry/_git/nc-rp-api.git/api/test/common"
 )
 
-// TrunkedNetworkList represents a list of trunked networks.
-type TrunkedNetworkList struct {
-  // The TrunkedNetwork items on this page
-  value []TrunkedNetwork
-
-  // The link to the next page of items
-  nextLink string
-}
-
 // TrunkedNetwork represents a network that utilizes multiple isolation domains and specified VLANs to create a trunked network.
 type TrunkedNetwork struct {
   // The list of the resource properties.
@@ -71,4 +62,13 @@ type TrunkedNetworkProperties struct {
 type TrunkedNetworkPatchParameters struct {
   // The Azure resource tags that will replace the existing ones.
   tags map[string]string
+}
+
+// TrunkedNetworkList represents a list of trunked networks.
+type TrunkedNetworkList struct {
+  // The TrunkedNetwork items on this page
+  value []TrunkedNetwork
+
+  // The link to the next page of items
+  nextLink string
 }

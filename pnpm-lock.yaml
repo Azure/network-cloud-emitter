@@ -18,8 +18,8 @@ importers:
         specifier: 0.61.0
         version: 0.61.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/http@1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))))(@typespec/rest@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/http@1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1)))))
       '@azure-tools/typespec-azure-resource-manager':
-        specifier: 0.61.0
-        version: 0.61.0(b391d77f0d6b9f133cd6f64b737bcf7e)
+        specifier: 0.61.1
+        version: 0.61.1(b391d77f0d6b9f133cd6f64b737bcf7e)
       '@typespec/compiler':
         specifier: 1.5.0
         version: 1.5.0(@types/node@24.9.1)
@@ -111,8 +111,8 @@ packages:
       '@typespec/http': ^1.5.0
       '@typespec/rest': ^0.75.0
 
-  '@azure-tools/typespec-azure-resource-manager@0.61.0':
-    resolution: {integrity: sha512-m/M6AareRXacDwyR82g9DqMppfX0eEsv0/q4PW2Lii7wGVzFiiU6fLqsiWBdIHl7GaKszTRtZXNRk/IL9HV8Lw==}
+  '@azure-tools/typespec-azure-resource-manager@0.61.1':
+    resolution: {integrity: sha512-+BVZf1OfSZfEaXsOp1ZUCyjjZjC465ieIAr1zEz4yD7KaWGW+yE/w+HXbsRNNw0B52FhgVcWX6iVuvBtMZpNMQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@azure-tools/typespec-azure-core': ^0.61.0
@@ -1547,7 +1547,7 @@ snapshots:
       '@typespec/http': 1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1)))
       '@typespec/rest': 0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/http@1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))))
 
-  '@azure-tools/typespec-azure-resource-manager@0.61.0(b391d77f0d6b9f133cd6f64b737bcf7e)':
+  '@azure-tools/typespec-azure-resource-manager@0.61.1(b391d77f0d6b9f133cd6f64b737bcf7e)':
     dependencies:
       '@azure-tools/typespec-azure-core': 0.61.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/http@1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))))(@typespec/rest@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/http@1.5.0(@typespec/compiler@1.5.0(@types/node@24.9.1))(@typespec/streams@0.75.0(@typespec/compiler@1.5.0(@types/node@24.9.1)))))
       '@typespec/compiler': 1.5.0(@types/node@24.9.1)
